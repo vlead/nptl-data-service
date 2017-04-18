@@ -1,0 +1,130 @@
+#+TITLE: The REST API
+#+AUTHOR: VLEAD
+#+DATE: [2017-04-13 Thu]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+          
+* Introduction 
+  This document illustrates building of the REST API.
+
+  
+* REST
+
+** Fetch the nptel URL
+   REST API to fetch the nptel links
+
+#+NAME: keyword_string
+#+BEGIN_SRC python
+def keyword_string(globalStr, pos1, pos2):
+    middle_str = globalStr[pos1 :pos2]
+    first_brace = middle_str.find("\"")
+    second_brace = middle_str.find("\"", (first_brace + 1) )
+    return middle_str[ (first_brace + 1) : second_brace]
+#+END_SRC
+
+#+NAME: fetchURL
+#+BEGIN_SRC python
+def fetchURL(mainStr, word, wordPosList):
+    start = mainStr.find('[', wordPosList)
+    end = mainStr.find(']', start)
+    linkStr = mainStr[start : end]
+    index = 0
+    while index < len(linkStr):
+            index = linkStr.find(',', index)
+            if index == -1:
+                break
+            comaPos.append(index)
+            index += 1
+    comaPos.append(len(linkStr))
+    pos = 0
+    for loop in range (0, len(comaPos)):
+            print keyword_string(linkStr, pos, comaPos[loop])
+            pos = comaPos[loop]
+    del comaPos0[:]
+#+END_SRC
+
+** API
+#+NAME: main
+#+BEGIN_SRC python
+@api.route('/', methods=['GET', 'POST'])
+def get_generic_feedback():
+    if request.method == 'GET':
+        return "helloworld"
+#+END_SRC
+
+
+* Infra                                                         :boilerplate:
+
+** sources
+*** Imports 
+#+name: imports_for_sources
+#+BEGIN_SRC python
+# -*- coding: utf-8 -*-
+import os
+import requests
+import json
+from flask import session, render_template, Blueprint, request, \
+     jsonify, abort, current_app, redirect, url_for
+from flask import Flask
+from runtime.utils.type_utils import jsonify_list
+from runtime.exceptions.custom_exceptions import *
+from runtime.system.system_interface import SystemInterface
+from runtime.config.flask_app_config import GENERIC_FEEDBACK_VERSION,\
+     GENERIC_LAB_FEEDBACK_VERSION, GENERIC_EXP_FEEDBACK_VERSION
+
+import yaml
+
+api = Blueprint('APIs', __name__)
+
+#+end_src
+
+
+** tests
+*** Imports 
+#+name: imports_for_tests
+#+BEGIN_SRC python
+# -*- coding: utf-8 -*-
+import unittest
+from flask_testing import TestCase
+from sqlalchemy.exc import IntegrityError
+from runtime.utils.class_persistence_template import db
+from runtime.rest.app import create_app
+from runtime.config.system_config import KEY
+from runtime.rest.api import *
+from runtime.system.system import System
+import datetime
+config = {
+         'SQLALCHEMY_DATABASE_URI': ''
+         }
+
+#+end_src
+
+*** Running tests
+#+NAME: run_test_cases
+#+BEGIN_SRC python
+if __name__ == '__main__':
+    unittest.main()
+
+#+END_SRC
+
+
+* Tangle                                                        :boilerplate:
+
+** sources
+#+BEGIN_SRC python :tangle api.py :eval no :noweb yes
+<<main>>
+<<keyword_string>>
+<<fetchURL>>
+
+#+END_SRC
+
+
+** tests
+#+BEGIN_SRC python :tangle test_api.py :eval no :noweb yes
+<<main>>
+<<keyword_string>>
+<<fetchURL>>
+#+end_src
+
