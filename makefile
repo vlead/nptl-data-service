@@ -44,8 +44,8 @@ init: pull-literate-tools
 	mkdir -p ${BUILD_DIR} ${CODE_DIR}
 
 build: init write-version
-		emacs  --script elisp/publish.el
-		rsync -avz --progress ${SRC_DIR}/runtime/rest/static ${BUILD_DIR}/code/runtime/rest/
+	emacs  --script elisp/publish.el
+	
 
 ign:
 	rsync -a ${SRC_DIR}/${ORG_DIR} ${BUILD_DIR}/docs

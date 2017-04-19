@@ -12,8 +12,9 @@
   
 * REST
 
-** Fetch the nptel URL
-   REST API to fetch the nptel links
+*** Fetch the string containing the keyword
+   - This function will give the string between the two indexes passed into
+     this function,to get the string between two points
 
 #+NAME: keyword_string
 #+BEGIN_SRC python
@@ -23,6 +24,10 @@ def keyword_string(globalStr, pos1, pos2):
     second_brace = middle_str.find("\"", (first_brace + 1) )
     return middle_str[ (first_brace + 1) : second_brace]
 #+END_SRC
+
+
+*** Get the Nptel URL links
+    - This function will fetch the url based on the keyword.
 
 #+NAME: fetchURL
 #+BEGIN_SRC python
@@ -44,87 +49,28 @@ def fetchURL(mainStr, word, wordPosList):
             pos = comaPos[loop]
     del comaPos0[:]
 #+END_SRC
+#+END_SRC
 
-** API
-#+NAME: main
+
+*** Main
+#+NAME: main_python
 #+BEGIN_SRC python
 @api.route('/', methods=['GET', 'POST'])
 def get_generic_feedback():
     if request.method == 'GET':
         return "helloworld"
 #+END_SRC
-
-
-* Infra                                                         :boilerplate:
-
-** sources
-*** Imports 
-#+name: imports_for_sources
-#+BEGIN_SRC python
-# -*- coding: utf-8 -*-
-import os
-import requests
-import json
-from flask import session, render_template, Blueprint, request, \
-     jsonify, abort, current_app, redirect, url_for
-from flask import Flask
-from runtime.utils.type_utils import jsonify_list
-from runtime.exceptions.custom_exceptions import *
-from runtime.system.system_interface import SystemInterface
-from runtime.config.flask_app_config import GENERIC_FEEDBACK_VERSION,\
-     GENERIC_LAB_FEEDBACK_VERSION, GENERIC_EXP_FEEDBACK_VERSION
-
-import yaml
-
-api = Blueprint('APIs', __name__)
-
-#+end_src
-
-
-** tests
-*** Imports 
-#+name: imports_for_tests
-#+BEGIN_SRC python
-# -*- coding: utf-8 -*-
-import unittest
-from flask_testing import TestCase
-from sqlalchemy.exc import IntegrityError
-from runtime.utils.class_persistence_template import db
-from runtime.rest.app import create_app
-from runtime.config.system_config import KEY
-from runtime.rest.api import *
-from runtime.system.system import System
-import datetime
-config = {
-         'SQLALCHEMY_DATABASE_URI': ''
-         }
-
-#+end_src
-
-*** Running tests
-#+NAME: run_test_cases
-#+BEGIN_SRC python
-if __name__ == '__main__':
-    unittest.main()
-
-#+END_SRC
-
-
+   
+ 
 * Tangle                                                        :boilerplate:
 
 ** sources
 #+BEGIN_SRC python :tangle api.py :eval no :noweb yes
-<<main>>
 <<keyword_string>>
 <<fetchURL>>
+<<main_python>>
 
 #+END_SRC
 
 
-** tests
-#+BEGIN_SRC python :tangle test_api.py :eval no :noweb yes
-<<main>>
-<<keyword_string>>
-<<fetchURL>>
-#+end_src
 
