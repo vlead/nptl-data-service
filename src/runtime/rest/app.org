@@ -152,11 +152,7 @@ import os
 from flask import Flask, jsonify, make_response
 from flask_cors import CORS
 
-from runtime.utils.class_persistence_template import db
 from runtime.rest.api import api
-from runtime.system.system_interface import SystemInterface
-from runtime.system.persistence_delegate import PersistenceDelegate
-
 # import config file
 from runtime.config import flask_app_config as config
 from runtime.config.flask_app_config import LOG_FILE_DIRECTORY
@@ -167,7 +163,7 @@ from runtime.config.flask_app_config import LOG_LEVEL
 
 
 * Tangle                                                        :boilerplate:
- #+BEGIN_SRC python :tangle app.py :eval no :noweb yes
+#+BEGIN_SRC python :tangle app.py :eval no :noweb yes
 <<imports>>
 <<configure_logging>>
 <<configure_error_handlers>>
