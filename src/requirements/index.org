@@ -1,0 +1,23 @@
+#+TITLE: Requirements
+#+AUTHOR: VLEAD
+#+DATE: [2017-04-07 FRI]
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document captures the requirements for the realization of this project.
+
+
+* Keyword to a NPTEL resource
+:PROPERTIES:
+:CUSTOM_ID: req1
+:END:
+  Given a keyword, the service provides a list of NPTEL lectures as urls.
+
+   
+
+
+
+

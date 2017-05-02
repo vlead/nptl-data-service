@@ -18,6 +18,8 @@ outreach-portal.egg-info/
 dist/
 logs/
 build/
+literate-tools/
+elisp
 elisp/
 org-templates/
 style/

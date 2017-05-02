@@ -1,17 +1,1 @@
-﻿{
-"cmos test": ["http://nptel.ac.in/courses/117101105/1",
-	   "http://nptel.ac.in/courses/117101105/2", 
-	   "http://nptel.ac.in/courses/117101105/3"]
-}
-
-{
-"data test": ["https://nptel.ac.in/courses/117101105/4",
-	   "https://nptel.ac.in/courses/117101105/5", 
-	   "https://nptel.ac.in/courses/117101105/6"]
-}
- 
-{
-"hello": ["https://nptel.ac.in/courses/117101105/7",
-	   "https://nptel.ac.in/courses/117101105/8", 
-	   "https://nptel.ac.in/courses/117101105/9"]
-}
+﻿

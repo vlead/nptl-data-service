@@ -1,0 +1,14 @@
+#+TITLE: Design
+#+AUTHOR: VLEAD
+#+DATE: [2017-05-02 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
+  This document captures a high level design of the application.
+
+
+* Sequence Diagram

@@ -1,0 +1,40 @@
+#+TITLE: Database
+#+AUTHOR: VLEAD
+#+DATE:[2017-05-02 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document provides the mapping between keywords and the NPTEL lecture
+  urls.  This database holds the keyword mapping for the [[http://cse02-iiith.vlabs.ac.in/][=computer programming lab=]].
+
+
+* KeyWord Dictionary
+#+BEGIN_SRC json :tangle database.json
+[
+  {
+    "cmos test": [
+      "http://nptel.ac.in/courses/117101105/1",
+      "http://nptel.ac.in/courses/117101105/2",
+      "http://nptel.ac.in/courses/117101105/3"
+    ]
+  },
+  {
+    "data test": [
+      "https://nptel.ac.in/courses/117101105/4",
+      "https://nptel.ac.in/courses/117101105/5",
+      "https://nptel.ac.in/courses/117101105/6"
+    ]
+  },
+  {
+    "hello": [
+      "https://nptel.ac.in/courses/117101105/7",
+      "https://nptel.ac.in/courses/117101105/8",
+      "https://nptel.ac.in/courses/117101105/9"
+    ]
+  }
+]
+
+#+END_SRC
