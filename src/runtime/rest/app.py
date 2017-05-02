@@ -1,5 +1,7 @@
 #!flask/bin/python
+import codecs
 from flask import Flask
+from flask import request
 
 app = Flask(__name__)
 
@@ -13,7 +15,7 @@ def keyword_string(globalStr, pos1, pos2):
 	second_brace = middle_str.find("\"", (first_brace + 1) )
 	return middle_str[ (first_brace + 1) : second_brace]
 
-def findWordOccurence (mainStr, word, posList):
+def findWordOccurence(mainStr, word, posList):
 	index = 0
 	while index < len(mainStr):
 		index = mainStr.find(word, index)
@@ -26,8 +28,8 @@ def getComaPos(mainStr, word, wordPosList):
 	start = mainStr.find('[', wordPosList)
 	end = mainStr.find(']', start)
 	linkStr = mainStr[start : end]
-	findWordOccurence(linkStr, ',', comaPos)
-	comaPos.append(len(linkStr))
+#	findWordOccurence(linkStr, ',', comaPos)
+#	comaPos.append(len(linkStr))
 	return linkStr
 
 def fetchURL(comaPosList, linkString):
@@ -42,33 +44,39 @@ def fetchURL(comaPosList, linkString):
 	del comaPosList[:]
 	return appendList
 
-def main():
+def get_url_params():
+    firstName = request.args.get('keyword')
+    return firstName
+
+def main(KeyWord):
 
     global appendedList
     global comaPos
     global KeywordPos
-
-    print ("\n\nWelcome to Keyword Search\n")
+    appendedList = ""
+    appendedList = "{\n" + "\"" + KeyWord + "\"" + ": "
+    #print ("\n\nWelcome to Keyword Search\n")
 
     #filepath = raw_input("Enter file Path : ")
-    KeyWord = raw_input("Enter the keyword to Search : ")
+    #KeyWord = raw_input("Enter the keyword to Search : ")
     filepath = "/home/pulkit/Desktop/VLABS_Docs/MY_codes/keyword.json"
-    myFile = open(filepath, "r")
+    myFile = codecs.open(filepath, "r", 'utf-8')
     contents = myFile.read()
-
-    findWordOccurence(contents, KeyWord.lower(), KeywordPos)
+    findWordOccurence(contents, KeyWord, KeywordPos)
     KeywordPos.append(len(contents))
     for x in range(0, len(KeywordPos) - 1):
         linkStr = getComaPos(contents, KeyWord, KeywordPos[x])
-        appendedList = appendedList + fetchURL(comaPos, linkStr)
+        appendedList = appendedList + linkStr + "]"
         if x < len(KeywordPos) - 2:
-            appendedList = appendedList + ", "
+            appendedList = appendedList + ", " + "\n"
+    appendedList = appendedList + "\n}"
     #print appendedList  # for Debug
     return appendedList
 
-@app.route('/')
+@app.route("/get_urls")
 def index():
-    test  = main()
+    key = request.args['key']
+    test  = main(key)
     return test
 
 if __name__ == '__main__':
