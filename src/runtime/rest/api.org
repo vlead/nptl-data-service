@@ -15,12 +15,63 @@
 ** Fetch NPTEL URLs for a given keyword
    REST API to do do the above
 
+#+NAME: find_word_occurences
+#+BEGIN_SRC python
+def findWordOccurence(mainStr, word, posList):
+    index = 0
+    while index < len(mainStr):
+        index = mainStr.find(word, index)
+        if index == -1:
+            break
+	posList.append(index)
+	index += len(word)
+#+END_SRC
+
+
+
+#+NAME: get_coma_pos
+#+BEGIN_SRC python
+def getComaPos(mainStr, word, wordPosList):
+    start = mainStr.find('[', wordPosList)
+    end = mainStr.find(']', start)
+    linkStr = mainStr[start : end]
+    return linkStr
+#+END_SRC
+
+
+
+#+NAME: main
+#+BEGIN_SRC python
+def main(KeyWord):
+    global appendedList
+    global comaPos
+    global KeywordPos
+    appendedList = ""
+    appendedList = "{\n" + "\"" + KeyWord + "\"" + ": "
+    #filepath = "/home/pulkit/Desktop/VLABS_Docs/MY_codes/keyword.json"
+    filepath = "/home/pulkit/Desktop/VLABS_Docs/nptl-data-service/build/code/runtime/config/database.json"
+    myFile = codecs.open(filepath, "r", 'utf-8')
+    contents = myFile.read()
+    findWordOccurence(contents, KeyWord, KeywordPos)
+    KeywordPos.append(len(contents))
+    for x in range(0, len(KeywordPos) - 1):
+        linkStr = getComaPos(contents, KeyWord, KeywordPos[x])
+        appendedList = appendedList + linkStr + "]"
+        if x < len(KeywordPos) - 2:
+            appendedList = appendedList + ", " + "\n"
+    appendedList = appendedList + "\n}"
+    return appendedList
+#+END_SRC
+
+
 #+NAME: get_nptel_urls_for_keyword
 #+BEGIN_SRC python
-@api.route('/keyword', methods=['GET'])
+@api.route("/search")
 def get_nptel_urls():
-    if request.method == 'GET':
-        current_app.logger.debug("get generic feedback")
+    key = request.args['key']
+    nptel_url = main(key)
+    return nptel_url
+
         # Create a new component (KeyWordUrlMapper)
         #instantiate this class
         # invoke the method =get_urls_for_keyword=
@@ -37,53 +88,22 @@ def get_nptel_urls():
 #+name: imports_for_sources
 #+BEGIN_SRC python
 # -*- coding: utf-8 -*-
-import os
 import requests
 import json
 from flask import session, render_template, Blueprint, request, \
      jsonify, abort, current_app, redirect, url_for
 from flask import Flask
-from runtime.utils.type_utils import jsonify_list
-from runtime.config.system_config import KEY
-from runtime.exceptions.custom_exceptions import *
-from runtime.system.system_interface import SystemInterface
 from runtime.config.flask_app_config import GENERIC_FEEDBACK_VERSION,\
      GENERIC_LAB_FEEDBACK_VERSION, GENERIC_EXP_FEEDBACK_VERSION, ELASTIC_DB_URL
-
+import codecs
 import yaml
-
 api = Blueprint('APIs', __name__)
 
-#+end_src
-
-
-** tests
-*** Imports 
-#+name: imports_for_tests
-#+BEGIN_SRC python
-# -*- coding: utf-8 -*-
-import unittest
-from flask_testing import TestCase
-from sqlalchemy.exc import IntegrityError
-from runtime.utils.class_persistence_template import db
-from runtime.rest.app import create_app
-from runtime.config.system_config import KEY
-from runtime.rest.api import *
-from runtime.system.system import System
-import datetime
-config = {
-         'SQLALCHEMY_DATABASE_URI': ''
-         }
+KeywordPos = []
+comaPos = []
+appendedList = ""
 
 #+end_src
-
-*** Running tests
-#+NAME: run_test_cases
-#+BEGIN_SRC python
-if __name__ == '__main__':
-    unittest.main()
-
-#+END_SRC
 
 
 * Tangle                                                        :boilerplate:
@@ -91,41 +111,9 @@ if __name__ == '__main__':
 ** sources
 #+BEGIN_SRC python :tangle api.py :eval no :noweb yes
 <<imports_for_sources>>
-<<get_add_generic_feedback>>
-<<get_add_generic_lab_exp_feedback>>
-<<get_success_template>>
-<<get_add_feedback>>
-<<get_feedback_usage>>
-<<get_feedback_dump>>
-<<get_gateway_ip>>
-<<get_and_add_question>>
-<<update_and_delete_question>>
-<<get_and_add_feedback_to_elk>>
-<<get_and_add_usage_to_elk>>
-<<add_feedback_to_elastic_db>>
-<<add_college_details_to_elk>>
-<<add_usage_to_elk>>
+<<find_word_occurences>>
+<<get_coma_pos>>
+<<main>>
+<<get_nptel_urls_for_keyword>>
 #+END_SRC
-
-
-** tests
-#+BEGIN_SRC python :tangle test_api.py :eval no :noweb yes
-<<imports_for_tests>>
-<<test_get_generic_feedback>>
-<<test_get_generic_lab_and_exp_feedback>>
-<<test_add_generic_feedback>>
-<<test_get_feedback>>
-<<test_add_feedback>>
-<<test_get_feedback_usage>>
-<<test_get_feedback_dump>>
-<<test_add_question>>
-<<test_update_question>>
-<<test_delete_question>>
-<<test_get_questions>>
-<<test_feedback_details_to_elk>>
-<<test_dump_college_details_to_elk>>
-<<test_dump_usages_details_to_elk>>
-<<test_feedback_details_to_elk>>
-<<run_test_cases>>
-#+end_src
 

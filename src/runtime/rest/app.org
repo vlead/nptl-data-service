@@ -19,18 +19,18 @@ def create_app(config):
     app = Flask(__name__)
     app.secret_key = 'djfjsdkjXXS7979dfdfd'
     # load config values from the config file
-    app.config.from_object(config)
-    cors = CORS(app, resources={r"/*": {"origins": "*"}})
+#    app.config.from_object(config)
+#    cors = CORS(app, resources={r"/*": {"origins": "*"}})
     # init sqlalchemy db instance
-    db.init_app(app)
-    db.app = app
+#    db.init_app(app)
+#    db.app = app
     # register blueprints
     app.register_blueprint(api)
-    configure_logging(app)
-    configure_errorhandlers(app)
+#    configure_logging(app)
+#    configure_errorhandlers(app)
     #  configure_cors(app)
     # all set; return app object
-    configure_system()
+#    configure_system()
     return app
 
 #+END_SRC
@@ -152,16 +152,16 @@ import os
 from flask import Flask, jsonify, make_response
 from flask_cors import CORS
 
-from runtime.utils.class_persistence_template import db
+#from runtime.utils.class_persistence_template import db
 from runtime.rest.api import api
-from runtime.system.system_interface import SystemInterface
-from runtime.system.persistence_delegate import PersistenceDelegate
+#from runtime.system.system_interface import SystemInterface
+#from runtime.system.persistence_delegate import PersistenceDelegate
 
 # import config file
 from runtime.config import flask_app_config as config
-from runtime.config.flask_app_config import LOG_FILE_DIRECTORY
-from runtime.config.flask_app_config import LOG_FILE
-from runtime.config.flask_app_config import LOG_LEVEL
+#from runtime.config.flask_app_config import LOG_FILE_DIRECTORY
+#from runtime.config.flask_app_config import LOG_FILE
+#from runtime.config.flask_app_config import LOG_LEVEL
 
 #+END_SRC
 
