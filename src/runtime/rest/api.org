@@ -31,7 +31,7 @@ def findWordOccurence(mainStr, word, posList):
 
 #+NAME: get_coma_pos
 #+BEGIN_SRC python
-def getComaPos(mainStr, word, wordPosList):
+def getComaPos(mainStr, wordPosList):
     start = mainStr.find('[', wordPosList)
     end = mainStr.find(']', start)
     linkStr = mainStr[start : end]
@@ -47,15 +47,16 @@ def main(KeyWord):
     global comaPos
     global KeywordPos
     appendedList = ""
+    KeywordPos = []
+    comaPos = []
     appendedList = "{\n" + "\"" + KeyWord + "\"" + ": "
-    #filepath = "/home/pulkit/Desktop/VLABS_Docs/MY_codes/keyword.json"
     filepath = "/home/pulkit/Desktop/VLABS_Docs/nptl-data-service/build/code/runtime/config/database.json"
     myFile = codecs.open(filepath, "r", 'utf-8')
     contents = myFile.read()
     findWordOccurence(contents, KeyWord, KeywordPos)
     KeywordPos.append(len(contents))
     for x in range(0, len(KeywordPos) - 1):
-        linkStr = getComaPos(contents, KeyWord, KeywordPos[x])
+        linkStr = getComaPos(contents, KeywordPos[x])
         appendedList = appendedList + linkStr + "]"
         if x < len(KeywordPos) - 2:
             appendedList = appendedList + ", " + "\n"
@@ -70,15 +71,8 @@ def main(KeyWord):
 def get_nptel_urls():
     key = request.args['key']
     nptel_url = main(key)
-    return nptel_url
+    return jsonify(results = nptel_url)
 
-        # Create a new component (KeyWordUrlMapper)
-        #instantiate this class
-        # invoke the method =get_urls_for_keyword=
-        # keyWordUrlMapper = KeyWordUrlMapper()
-        # url_list = keyWordUrlMapper.get_urls_for_keyword(keyword)
-        # return this list
-            
 #+END_SRC
 
 * Infra                                                         :boilerplate:
