@@ -15,6 +15,9 @@
 ** Fetch NPTEL URLs for a given keyword
    REST API to do do the above
 
+*** Function to find the number of Word occurrences.
+    - The function will take the string data as input and will output the
+      number of occurrences of a keyword in it.
 #+NAME: find_word_occurences
 #+BEGIN_SRC python
 def findWordOccurence(mainStr, word, posList):
@@ -27,7 +30,9 @@ def findWordOccurence(mainStr, word, posList):
 	index += len(word)
 #+END_SRC
 
-
+*** Outputs the string containing the keyword
+    - This will take the long content string as input and will output the
+      NPTEL url's containing the keyword searched
 
 #+NAME: get_coma_pos
 #+BEGIN_SRC python
@@ -38,7 +43,9 @@ def getComaPos(mainStr, wordPosList):
     return linkStr
 #+END_SRC
 
-
+*** This is the main loop.
+    - This is the main logic of the keyword search, which will output the NOTEL
+      url's when asked for by the user.
 
 #+NAME: main
 #+BEGIN_SRC python
@@ -65,6 +72,9 @@ def main(KeyWord):
 #+END_SRC
 
 
+*** Function to take query from the user
+    - User can input the keyword for search and will get the url as the output
+
 #+NAME: get_nptel_urls_for_keyword
 #+BEGIN_SRC python
 @api.route("/search")
@@ -74,6 +84,7 @@ def get_nptel_urls():
     return jsonify(results = nptel_url)
 
 #+END_SRC
+
 
 * Infra                                                         :boilerplate:
 

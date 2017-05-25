@@ -10,5 +10,73 @@
 * Introduction
   This document captures a high level design of the application.
 
+* Process
 
-* Sequence Diagram
+** Get NPTEL URL containing the keyword passed
+*** API Designs 
+**** Get all url for a keyword
+  :PROPERTIES:
+  :CUSTOM_ID: api_get_all_labs
+  :END:    
+  - URL :: /search?key=keyword
+
+  - Method :: GET
+
+  - URL Params ::  None
+
+  - Payload :: 
+
+  - Example:
+#+BEGIN_EXAMPLE
+http://localhost:5000/search?key=test
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+[
+results:"{
+"test": [
+        "http://nptel.ac.in/courses/117101105/1",
+        "http://nptel.ac.in/courses/117101105/2",
+        "http://nptel.ac.in/courses/117101105/3"
+        ], 
+        [
+        "https://nptel.ac.in/courses/117101105/4",
+        "https://nptel.ac.in/courses/117101105/5",
+        "https://nptel.ac.in/courses/117101105/6"
+        ]
+        }" 
+]
+#+END_EXAMPLE	       
+
+  - Example:
+#+BEGIN_EXAMPLE
+http://localhost:5000/search?key=cmos
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+[
+results:"{
+"cmos": [
+        "http://nptel.ac.in/courses/117101105/1",
+        "http://nptel.ac.in/courses/117101105/2",
+        "http://nptel.ac.in/courses/117101105/3"
+        ]
+        }" 
+]
+#+END_EXAMPLE
+
+
+  - Example:
+#+BEGIN_EXAMPLE
+http://localhost:5000/search?key=hello
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+[
+results:"{
+"hello": [
+        "http://nptel.ac.in/courses/117101105/7",
+        "http://nptel.ac.in/courses/117101105/8",
+        "http://nptel.ac.in/courses/117101105/9"
+        ], 
+        }" 
+]
+#+END_EXAMPLE
+
