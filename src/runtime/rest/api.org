@@ -44,7 +44,7 @@ def getComaPos(mainStr, wordPosList):
 #+END_SRC
 
 *** This is the main loop.
-    - This is the main logic of the keyword search, which will output the NOTEL
+    - This is the main logic of the keyword search, which will output the NPTEL
       url's when asked for by the user.
 
 #+NAME: main
@@ -70,7 +70,6 @@ def main(KeyWord):
     appendedList = appendedList + "\n}"
     return appendedList
 #+END_SRC
-
 
 *** Function to take query from the user
     - User can input the keyword for search and will get the url as the output

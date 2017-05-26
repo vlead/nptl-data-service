@@ -16,8 +16,14 @@
 :END:
   Given a keyword, the service provides a list of NPTEL lectures as urls.
 
-   
+  
+* Usage of the service
+:PROPERTIES:
+:CUSTOM_ID: req1
+:END:
+  The service will be used by a lab, wherein a new tab will be present for
+  Videos. Clicking on this Videos tab, the service will be called which will
+  search for the lab keyword and will display the url related to that
+  particular keyword.
 
-
-
-
+  
