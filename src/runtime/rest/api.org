@@ -39,7 +39,7 @@ def findWordOccurence(mainStr, word, posList):
 def getComaPos(mainStr, wordPosList):
     start = mainStr.find('[', wordPosList)
     end = mainStr.find(']', start)
-    linkStr = mainStr[start : end]
+    linkStr = mainStr[start+1 : end]
     return linkStr
 #+END_SRC
 
@@ -56,7 +56,7 @@ def main(KeyWord):
     appendedList = ""
     KeywordPos = []
     comaPos = []
-    appendedList = "{\n" + "\"" + KeyWord + "\"" + ": "
+    appendedList = "{\n" + "\"" + KeyWord + "\"" + ": " + " ["
     filepath = "/home/pulkit/Desktop/VLABS_Docs/nptl-data-service/build/code/runtime/config/database.json"
     myFile = codecs.open(filepath, "r", 'utf-8')
     contents = myFile.read()
@@ -64,10 +64,10 @@ def main(KeyWord):
     KeywordPos.append(len(contents))
     for x in range(0, len(KeywordPos) - 1):
         linkStr = getComaPos(contents, KeywordPos[x])
-        appendedList = appendedList + linkStr + "]"
+        appendedList = appendedList + linkStr 
         if x < len(KeywordPos) - 2:
             appendedList = appendedList + ", " + "\n"
-    appendedList = appendedList + "\n}"
+    appendedList = appendedList + "]" + "\n}"
     return appendedList
 #+END_SRC
 
@@ -80,7 +80,7 @@ def main(KeyWord):
 def get_nptel_urls():
     key = request.args['key']
     nptel_url = main(key)
-    return jsonify(results = nptel_url)
+    return jsonify(nptel_url)
 
 #+END_SRC
 
