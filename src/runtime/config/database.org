@@ -34,7 +34,27 @@
       "https://nptel.ac.in/courses/117101105/8",
       "https://nptel.ac.in/courses/117101105/9"
     ]
+  }, 
+  {
+    "Numerical": [
+      "http://nptel.ac.in/courses/122104019/20",
+      "http://nptel.ac.in/courses/122104019/22"
+    ]
+  }, 
+  {
+    "Approximation": [
+      "http://nptel.ac.in/courses/122104019/21",
+      "http://nptel.ac.in/courses/122104019/23"
+    ]
+  }, 
+  {
+    "Numerical Approximation": [
+      "http://nptel.ac.in/courses/122104019/24",
+      "http://nptel.ac.in/courses/122104019/25",
+      "http://nptel.ac.in/courses/122104019/26"
+    ]
   }
+
 ]
 
 #+END_SRC

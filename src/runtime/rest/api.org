@@ -54,19 +54,24 @@ def main(KeyWord):
     global comaPos
     global KeywordPos
     appendedList = ""
-    KeywordPos = []
+    all_keywords = []
     comaPos = []
     appendedList = "{\n" + "\"" + KeyWord + "\"" + ": " + " ["
     filepath = "/home/pulkit/Desktop/VLABS_Docs/nptl-data-service/build/code/runtime/config/database.json"
     myFile = codecs.open(filepath, "r", 'utf-8')
     contents = myFile.read()
-    findWordOccurence(contents, KeyWord, KeywordPos)
-    KeywordPos.append(len(contents))
-    for x in range(0, len(KeywordPos) - 1):
-        linkStr = getComaPos(contents, KeywordPos[x])
-        appendedList = appendedList + linkStr 
-        if x < len(KeywordPos) - 2:
-            appendedList = appendedList + ", " + "\n"
+    all_keywords = KeyWord.split()
+    for noofwords in range (0, len(all_keywords) ):
+        KeywordPos = []
+        findWordOccurence(contents, all_keywords[noofwords], KeywordPos)
+        KeywordPos.append(len(contents))
+        for x in range(0, len(KeywordPos) - 1):
+            linkStr = getComaPos(contents, KeywordPos[x])
+            appendedList = appendedList + linkStr 
+            if x < len(KeywordPos) - 2:
+                appendedList = appendedList + ", " + "\n"
+        if noofwords < len(all_keywords) - 1:
+            appendedList = appendedList + ", " 
     appendedList = appendedList + "]" + "\n}"
     return appendedList
 #+END_SRC

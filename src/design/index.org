@@ -12,6 +12,32 @@
 
 * Process
 
+** Set up the environment to run the service
+   1. Clone the repository to your machine
+      - git clone <<copied url>>
+   2. Change directory to the cloned folder.
+      - cd <<cloned directory in the local machine>>
+   3. Run make
+      - make
+   4. If successfully done, a build folder will be created in the cloned
+      directory. 
+   5. go to the code folder and change the PYTHONPATH
+      - cd </yourDestinationDirectory/build/code>
+      - export PYTHONPATH=$(pwd)
+   6. Navigate to rest folder
+      - cd <</code/runtime/rest>>
+   7. Run the app.
+      - python app.py
+   8. If everything is fine, the service will start.
+
+** Check whether the service is working 
+   1. Initially, Keywords present for testing are : test, hello, data, cmos,
+      Numerical, Approximation, Numerical Approximation.
+   2. Any of the keyword can be used to test the service running.
+   3. To check the result of the service, open url : 
+      - http://localhost:5000/search?key=yourChosenKeyword
+   4. A few examples are explained below, Kindly go through them.
+
 ** Get NPTEL URL containing the keyword passed
 *** API Designs 
 **** Get all url for a keyword
