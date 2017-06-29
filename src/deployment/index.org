@@ -26,12 +26,14 @@
    4. If successfully done, a build folder will be created in the cloned
       directory.
 
+
 * Insert Default data 
    1. go to the code folder and change the PYTHONPATH
       #+BEGIN_EXAMPLE
       cd </yourDestinationDirectory/build/code>
       export PYTHONPATH=$(pwd)
       #+END_EXAMPLE
+
 * Run the application
    1. Navigate to rest folder
       #+BEGIN_EXAMPLE
@@ -54,8 +56,11 @@
       Numerical, Approximation, Numerical Approximation.
    2. Any of the keyword can be used to test the service running.
    3. To check the result of the service, open url : 
-      - http://localhost:5000/search?key=yourChosenKeyword
+      #+BEGIN_EXAMPLE
+      http://localhost:5000/search?key=yourChosenKeyword
+      #+END_EXAMPLE
    4. A few examples are explained below, Kindly go through them.
+
 
 * Sample Examples of running the service
 *** API Designs 
