@@ -10,7 +10,27 @@
   This document captures a high level design of the application.
 
 
+* Creation of Virtual Environment
+  + Create Virtual Environment in the =nptl-data-service= directory
+  #+BEGIN_EXAMPLE
+  virtualenv venv
+  #+END_EXAMPLE
+  + Activate the Virtual Environment
+  #+BEGIN_EXAMPLE
+  source venv/bin/activate
+  #+END_EXAMPLE
+
+
 * Set up dependencies
+  1. Install all the required dependencies
+  #+BEGIN_EXAMPLE
+  pip install flask
+  pip install flask-cors
+  pip install flask-testing
+  pip install requests
+  pip install pyyaml
+  #+END_EXAMPLE
+* Clone the service repository 
    1. Clone the repository to your machine.
       #+BEGIN_EXAMPLE
       git clone <<copied url>>
@@ -33,6 +53,7 @@
       cd </yourDestinationDirectory/build/code>
       export PYTHONPATH=$(pwd)
       #+END_EXAMPLE
+
 
 * Run the application
    1. Navigate to rest folder
