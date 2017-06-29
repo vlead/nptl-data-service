@@ -1,4 +1,4 @@
-#+TITLE: Design
+#+TITLE: Running Keyword Service
 #+AUTHOR: VLEAD
 #+DATE: [2017-05-02 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
@@ -6,31 +6,50 @@
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
 
-
 * Introduction
   This document captures a high level design of the application.
 
-* Process
 
-** Set up the environment to run the service
-   1. Clone the repository to your machine
-      - git clone <<copied url>>
+* Set up dependencies
+   1. Clone the repository to your machine.
+      #+BEGIN_EXAMPLE
+      git clone <<copied url>>
+      #+END_EXAMPLE
    2. Change directory to the cloned folder.
-      - cd <<cloned directory in the local machine>>
+      #+BEGIN_EXAMPLE
+      cd <<cloned directory in the local machine>>
+      #+END_EXAMPLE
    3. Run make
-      - make
+      #+BEGIN_EXAMPLE
+      make
+      #+END_EXAMPLE
    4. If successfully done, a build folder will be created in the cloned
-      directory. 
-   5. go to the code folder and change the PYTHONPATH
-      - cd </yourDestinationDirectory/build/code>
-      - export PYTHONPATH=$(pwd)
-   6. Navigate to rest folder
-      - cd <</code/runtime/rest>>
-   7. Run the app.
-      - python app.py
-   8. If everything is fine, the service will start.
+      directory.
 
-** Check whether the service is working 
+* Insert Default data 
+   1. go to the code folder and change the PYTHONPATH
+      #+BEGIN_EXAMPLE
+      cd </yourDestinationDirectory/build/code>
+      export PYTHONPATH=$(pwd)
+      #+END_EXAMPLE
+* Run the application
+   1. Navigate to rest folder
+      #+BEGIN_EXAMPLE
+      cd <</code/runtime/rest>>
+      #+END_EXAMPLE
+   2. Unset the proxy
+      #+BEGIN_EXAMPLE
+      unset http_proxy
+      unset https_proxy
+      #+END_EXAMPLE
+   3. Run the app.
+      #+BEGIN_EXAMPLE
+      python app.py
+      #+END_EXAMPLE
+   3. If everything is fine, the service will start.
+
+
+* Access the application 
    1. Initially, Keywords present for testing are : test, hello, data, cmos,
       Numerical, Approximation, Numerical Approximation.
    2. Any of the keyword can be used to test the service running.
@@ -38,7 +57,7 @@
       - http://localhost:5000/search?key=yourChosenKeyword
    4. A few examples are explained below, Kindly go through them.
 
-** Get NPTEL URL containing the keyword passed
+* Sample Examples of running the service
 *** API Designs 
 **** Get all url for a keyword
   :PROPERTIES:
